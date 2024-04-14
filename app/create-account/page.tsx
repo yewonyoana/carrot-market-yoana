@@ -3,11 +3,12 @@
 import { ChatBubbleOvalLeftEllipsisIcon } from "@heroicons/react/24/solid";
 
 import Link from "next/link";
-import FormInput from "../components/form-input";
-import FormButton from "../components/form-btn";
+import Input from "../components/input";
+import Button from "../components/button";
 import SocialLogin from "../components/social-login";
 import { useFormState } from "react-dom";
 import { createAccount } from "./actions";
+import { PASSWORD_MIN_LENGTH } from "@/lib/constants";
 
 export default function CreateAccount() {
   const [state, dispatch] = useFormState(createAccount, null);
@@ -20,7 +21,7 @@ export default function CreateAccount() {
       </div>
       <form action={dispatch} className="flex flex-col gap-3">
         {/* action은 use server를 해줄 수 있음  */}
-        <FormInput
+        <Input
           name="username"
           // Server action에서 form을 넘겨줘야 하기 때문에 name을 꼭 설정해 줘야 함
           type="text"
@@ -28,29 +29,33 @@ export default function CreateAccount() {
           required
           errors={state?.fieldErrors.username}
           //fieldErrors는 사용자가 입력한 필드에 대한 오류 메시지를 포함하는 객체
+          minLength={3}
+          maxLength={20}
         />
-        <FormInput
+        <Input
           name="email"
           type="email"
           placeholder="Email"
           required
           errors={state?.fieldErrors.email}
         />
-        <FormInput
+        <Input
           name="password"
           type="password"
           placeholder="Password"
           required
           errors={state?.fieldErrors.password}
+          minLength={PASSWORD_MIN_LENGTH}
         />
-        <FormInput
+        <Input
           name="confirm_password"
           type="password"
           placeholder="Confirm Password"
           required
           errors={state?.fieldErrors.confirm_password}
+          minLength={PASSWORD_MIN_LENGTH}
         />
-        <FormButton text="Create account" />
+        <Button text="Create account" />
       </form>
       <SocialLogin />
     </div>
