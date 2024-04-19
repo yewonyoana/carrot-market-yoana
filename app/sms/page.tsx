@@ -5,8 +5,14 @@ import Input from "@/app/components/input";
 import { useFormState } from "react-dom";
 import { smsLogin } from "./action";
 
+const initialState = {
+  token: false,
+  error: undefined,
+};
+
 export default function SMSLogin() {
-  const [state, dispatch] = useFormState(smsLogin, null);
+  const [state, dispatch] = useFormState(smsLogin, initialState);
+  // useFormState의 첫 번째 함수는 실행시키고 싶은 트리거, 두 번째는 훅
   return (
     <div className="flex flex-col gap-10 py-8 px-6">
       <div className="flex flex-col gap-2 *:font-medium">
@@ -14,16 +20,28 @@ export default function SMSLogin() {
         <h2 className="text-xl">Verify your phone number.</h2>
       </div>
       <form action={dispatch} className="flex flex-col gap-3">
-        <Input name="phone" type="text" placeholder="Phone number" required />
-        <Input
-          name="token"
-          type="number"
-          placeholder="Verification code"
-          required
-          min={100000}
-          max={999999}
+        {state.token ? (
+          <Input
+            name="token"
+            type="number"
+            placeholder="Verification code"
+            required
+            min={100000}
+            max={999999}
+            errors={state.error?.formErrors}
+          />
+        ) : (
+          <Input
+            name="phone"
+            type="text"
+            placeholder="Phone number"
+            required
+            errors={state.error?.formErrors}
+          />
+        )}
+        <Button
+          text={state.token ? " Verify Token" : "Send Verification SMS"}
         />
-        <Button text="Verify" />
       </form>
     </div>
   );
