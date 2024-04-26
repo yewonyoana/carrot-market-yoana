@@ -79,7 +79,7 @@ export default async function ProductDetail({
         </div>
       </div>
 
-      <div className="p-5">
+      <div className="p-5 h-[500px]">
         <h1 className="text-2xl font-semibold">{product.title}</h1>
         <p>{product.description}</p>
       </div>
