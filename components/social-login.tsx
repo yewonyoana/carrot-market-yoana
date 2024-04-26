@@ -34,7 +34,7 @@ export default function SocialLogin() {
           </span>
           <span>Continue with SMS</span>
         </Link>
-        <Link
+        {/* <Link
           className="primary-btn flex h-10 items-center justify-center gap-2"
           href="/naver/start"
         >
@@ -91,7 +91,7 @@ export default function SocialLogin() {
             />
           </svg>
           <span>Continue with KAKAO</span>
-        </Link>
+        </Link> */}
       </div>
     </>
   );
