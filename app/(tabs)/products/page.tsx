@@ -9,6 +9,7 @@ async function getInitialProducts() {
   const products = await db.product.findMany({
     select: {
       title: true,
+      description: true,
       price: true,
       created_at: true,
       photo: true,
@@ -25,7 +26,6 @@ async function getInitialProducts() {
 export type InitialProducts = Prisma.PromiseReturnType<
   typeof getInitialProducts
 >;
-// prisma에게 이 함수가 return할 type이 무엇인지 알려주는 것
 
 export default async function Products() {
   const initialProducts = await getInitialProducts();
@@ -35,7 +35,7 @@ export default async function Products() {
       <ProductList initialProducts={initialProducts} />
       <Link
         href="/products/add"
-        className="bg-orange-500 flex items-center justify-center rounded-full size-16 fixed bottom-24 right-8 text-white transition-colors hover:bg-orange-400"
+        className="bg-red-500 flex items-center justify-center rounded-full size-16 fixed bottom-24 right-8 text-white transition-colors hover:bg-red-400"
       >
         <PlusIcon className="size-10" />
       </Link>

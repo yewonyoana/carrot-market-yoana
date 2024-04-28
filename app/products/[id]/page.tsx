@@ -1,6 +1,5 @@
 import db from "@/lib/db";
 import getSession from "@/lib/session";
-import { formatToWon } from "@/lib/utils";
 import { UserIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import Link from "next/link";
@@ -82,19 +81,11 @@ export default async function ProductDetail({
       <div className="p-5 h-[500px]">
         <h1 className="text-2xl font-semibold">{product.title}</h1>
         <p>{product.description}</p>
+        <p># {product.price}</p>
       </div>
 
-      <div className="fixed bottom-0 left-0 flex w-full items-center justify-between bg-neutral-800 p-5 pb-10">
-        <span className="text-xl font-semibold">
-          {formatToWon(product.price)}원
-        </span>
+      <div className="fixed bottom-0 left-0 flex w-full items-center justify-end bg-black p-5 pb-10">
         {isOwner ? <ProductDeleteButton productId={product.id} /> : null}
-        <Link
-          href={``}
-          className="rounded-md bg-orange-500 px-5 py-2.5 font-semibold text-white"
-        >
-          채팅하기
-        </Link>
       </div>
     </div>
   );

@@ -8,16 +8,16 @@ import { redirect } from "next/navigation";
 
 const productSchema = z.object({
   photo: z.string({
-    required_error: "사진은 필수입니다.",
+    required_error: "Required",
   }),
   title: z.string({
-    required_error: "제목은 필수입니다.",
+    required_error: "Required",
   }),
   description: z.string({
-    required_error: "설명은 필수입니다.",
+    required_error: "Required",
   }),
-  price: z.coerce.number({
-    required_error: "가격은 필수입니다.",
+  price: z.string({
+    required_error: "Required",
   }),
 });
 
@@ -29,7 +29,6 @@ export async function uploadProduct(formData: FormData) {
     description: formData.get("description"),
   };
   if (data.photo instanceof File) {
-    // 일단 테스트를 위해 작성 이건 실제로 안 쓰일거임
     const photoData = await data.photo.arrayBuffer();
     await fs.appendFile(`./public/${data.photo.name}`, Buffer.from(photoData));
     data.photo = `/${data.photo.name}`;
@@ -57,8 +56,6 @@ export async function uploadProduct(formData: FormData) {
         },
       });
       redirect(`/products/${product.id}`);
-      //   redirect('/products');
     }
   }
-  //   console.log(data);
 }

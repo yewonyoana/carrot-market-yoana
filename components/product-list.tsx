@@ -8,17 +8,6 @@ import { getMoreProducts } from "@/app/(tabs)/products/actions";
 interface ProductListProps {
   initialProducts: InitialProducts;
 }
-// 이렇게 하면 선언에 무엇을 추가하던 간에 prisma가 자동으로 추론해준다
-// page에서 type을 선언하고 export 해주는 것과 같음
-// interface ProductListProps {
-//   initialProducts: {
-//     id: number;
-//     title: string;
-//     price: number;
-//     photo: string;
-//     created_at: Date;
-//   }[];
-// }
 
 export default function ProductList({ initialProducts }: ProductListProps) {
   const [products, setProducts] = useState(initialProducts);
@@ -29,7 +18,6 @@ export default function ProductList({ initialProducts }: ProductListProps) {
   const [isLastPage, setIsLastPage] = useState(false);
 
   const trigger = useRef<HTMLSpanElement>(null);
-  // js에서 document.getElementById()와 비슷하다고 생각하면 됨
   useEffect(() => {
     const observer = new IntersectionObserver(
       async (
@@ -52,7 +40,6 @@ export default function ProductList({ initialProducts }: ProductListProps) {
       },
       {
         threshold: 1.0,
-        // rootMargin: "0px 0px -300px 0px",
       }
     );
     if (trigger.current) {
@@ -72,9 +59,9 @@ export default function ProductList({ initialProducts }: ProductListProps) {
       {!isLastPage ? (
         <span
           ref={trigger}
-          className=" text-sm font-semibold bg-orange-500 w-fit mx-auto px-3 py-2 rounded-md hover:opacity-90 active:scale-95"
+          className=" text-sm font-semibold bg-red-500 w-fit mx-auto px-3 py-2 rounded-md hover:opacity-90 active:scale-95"
         >
-          {isLoading ? "로딩 중" : "더 보기"}
+          {isLoading ? "Loading" : "More"}
         </span>
       ) : null}
     </div>

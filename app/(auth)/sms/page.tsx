@@ -12,7 +12,6 @@ const initialState = {
 
 export default function SMSLogin() {
   const [state, dispatch] = useFormState(smsLogin, initialState);
-  // useFormState의 첫 번째 함수는 실행시키고 싶은 트리거, 두 번째는 훅
   return (
     <div className="flex flex-col gap-10 py-8 px-6">
       <div className="flex flex-col gap-2 *:font-medium">

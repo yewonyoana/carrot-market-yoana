@@ -22,7 +22,6 @@ const checkEmailExists = async (email: string) => {
   });
   return Boolean(user);
 };
-// find a user with the email
 
 const formSchema = z.object({
   email: z
@@ -33,8 +32,6 @@ const formSchema = z.object({
   password: z.string({
     required_error: "Password is required",
   }),
-  // .min(PASSWORD_MIN_LENGTH)
-  // .regex(PASSWORD_REGEX, PASSWORD_REGEX_ERROR),
 });
 
 export async function login(prevState: any, formData: FormData) {
@@ -59,12 +56,10 @@ export async function login(prevState: any, formData: FormData) {
       result.data.password,
       user!.password ?? "xxx"
     );
-    // if the user is found => check password hash
     if (ok) {
       const session = await getSession();
       session.id = user!.id;
       await session.save();
-      // log the user in
       redirect("/profile");
     } else {
       return {
@@ -74,7 +69,5 @@ export async function login(prevState: any, formData: FormData) {
         },
       };
     }
-
-    // redirect '/profile'
   }
 }
