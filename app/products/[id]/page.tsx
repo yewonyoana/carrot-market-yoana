@@ -86,6 +86,9 @@ export default async function ProductDetail({
 
       <div className="fixed bottom-0 left-0 flex w-full items-center justify-end bg-black p-5 pb-10">
         {isOwner ? <ProductDeleteButton productId={product.id} /> : null}
+        <Link href={``} className="rounded-full bg-white px-3. py-2.5">
+          👍
+        </Link>
       </div>
     </div>
   );
